@@ -1,5 +1,7 @@
 using Formula.App.Database;
 using Microsoft.EntityFrameworkCore;
+using Formula.App.Core;
+using Formula.App.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApiDbContext>(
     opt => opt.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQL_Connection"))
 );
+
+builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 
 var app = builder.Build();
 
