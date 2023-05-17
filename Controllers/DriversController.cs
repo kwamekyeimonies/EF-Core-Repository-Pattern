@@ -52,6 +52,37 @@ namespace Formula.App.Controllers
             return Ok();
         }
 
+        [HttpDelete("{id}")]
+        public IActionResult DeleteDriver(Guid id)
+        {
+            var driver = _drivers.FirstOrDefault(dv => dv.Id.Equals(id));
+
+            if (driver == null)
+            {
+                return NotFound();
+            }
+
+            _drivers.Remove(driver);
+            return NoContent();
+        }
+
+        [HttpPatch("{id}")]
+        public IActionResult UpdateDriver(Driver driver)
+        {
+            var existingDriver = _drivers.FirstOrDefault(x => x.Id == driver.Id);
+
+            if (existingDriver == null)
+            {
+                return NotFound();
+            }
+
+            existingDriver.Name = driver.Name;
+            existingDriver.Team = driver.Team;
+            existingDriver.DriverNumber = driver.DriverNumber;
+
+            return NoContent();
+        }
+
 
     }
 }
