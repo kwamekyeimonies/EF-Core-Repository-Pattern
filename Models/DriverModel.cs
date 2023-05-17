@@ -1,5 +1,8 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Formula.App.Models
 {
+    [Table("drivers")]
     public class Driver
     {
         public Guid Id { get; set; }
